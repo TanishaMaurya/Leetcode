@@ -6,7 +6,7 @@ class Solution {
         int max = 0;
         while(j < s.length()){
             map.put(s.charAt(j), map.getOrDefault(s.charAt(j), 0) + 1);
-            System.out.println(map);
+            // System.out.println(map);
             if(map.size() == j - i + 1){
                 max = Math.max(max, j - i + 1);
                 j++;
