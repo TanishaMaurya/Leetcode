@@ -23,6 +23,8 @@ class Solution {
 
             x *= x;
             n /= 2;
+            // re*=x;
+            // n
         }
 
         return re; 
