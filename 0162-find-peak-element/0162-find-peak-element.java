@@ -1,15 +1,33 @@
 class Solution {
     public int findPeakElement(int[] nums) {
-        int n=nums.length;
-        int p=0;
-        for(int i=0;i<n-1;i++){
-              if(nums[i+1]>nums[i]){
-                  p=(i+1);
-              }
-              else{
-                  continue;
-              }
+      
+        if(nums.length<2){
+            return 0;
+              
         }
-        return p;
-    }
+         int n=nums.length-1;
+        if(nums[0]>nums[1]){
+            return 0;
+        }
+        if(nums[n]>nums[n-1]){
+            return n;
+        }
+        
+        int l=1,h=n-1;
+        while(l<=h){
+            int m=(l+h)/2;
+            if(nums[m-1]<nums[m] && nums[m]>nums[m+1]){
+                return m;
+            }
+            else if(nums[m-1]>nums[m]){
+                h=m-1;
+            }else{
+                
+                l=m+1;
+            }
+            }
+        return -1;
+            
+        }
+    
 }
