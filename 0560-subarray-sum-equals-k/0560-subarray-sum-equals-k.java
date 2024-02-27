@@ -12,6 +12,7 @@ class Solution {
                 c += hm.get(s-k);
             }
             hm.put(s,hm.getOrDefault(s,0)+1);
+           
         }
         return c;
     }
