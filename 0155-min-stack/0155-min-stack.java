@@ -14,6 +14,7 @@ class MinStack {
             int currentMin = Math.min(val, stack.peek()[1]);
             stack.push(new int[]{val, currentMin});
         }
+      
     }
 
     public void pop() {
