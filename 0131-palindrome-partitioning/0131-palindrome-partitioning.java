@@ -1,30 +1,31 @@
 class Solution {
     public List<List<String>> partition(String s) {
-        List<List<String>> l=new ArrayList<>();
-        List<String> p=new ArrayList<>();
-        insertlist(0,s,p,l);
-        return l;
-    }
-    static void insertlist(int ind,String s,List<String> p,List<List<String>> l){
-        if(ind==s.length()){
-            l.add(new ArrayList<>(p));
-            return;
-        }else{
-            for(int i=ind;i<s.length();i++){
-                if(IsPalindromes(s,ind,i)){
-                    p.add(s.substring(ind,i+1));
-                    insertlist(i+1,s,p,l);
-                    p.remove(p.size()-1);
+       List<List<String>> res = new ArrayList<>();
+        boolean[][] dp = new boolean[s.length()][s.length()];
+        for(int i = 0; i < s.length(); i++) {
+            for(int j = 0; j <= i; j++) {
+                if(s.charAt(i) == s.charAt(j) && (i - j <= 2 || dp[j+1][i-1])) {
+                    dp[j][i] = true;
                 }
             }
         }
+        helper(res, new ArrayList<>(), dp, s, 0);
+        return res;
     }
-    static boolean IsPalindromes(String s,int st,int e){
-        while(st<=e){
-            if(s.charAt(st++)!=s.charAt(e--)){
-                return false;
+    
+    private void helper(List<List<String>> res, List<String> path, boolean[][] dp, String s, int pos) {
+        if(pos == s.length()) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        
+        for(int i = pos; i < s.length(); i++) {
+            if(dp[pos][i]) {
+                path.add(s.substring(pos,i+1));
+                helper(res, path, dp, s, i+1);
+                path.remove(path.size()-1);
             }
         }
-        return true;
+    
     }
 }
