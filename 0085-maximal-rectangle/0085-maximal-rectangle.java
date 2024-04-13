@@ -40,6 +40,7 @@ class Solution {
                 nsr[i] =arr.length;
             }
             else{
+        
                 nsr[i] = s.peek();
             }
             s.push(i);
