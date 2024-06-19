@@ -18,7 +18,7 @@ class Solution {
     }
 
     public int minDays(int[] bloomDay, int m, int k) {
-        long val = (long) m * k;
+            long val = (long) m * k;
         int n = bloomDay.length; // Size of the array
         if (val > n) return -1; // Impossible case.
         // Find maximum and minimum:
