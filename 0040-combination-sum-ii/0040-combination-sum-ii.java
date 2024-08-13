@@ -9,11 +9,14 @@ class Solution {
             }
       for(int i=ind;i<a.length;i++){
        if(i>ind &&    a[i]==a[i-1]) continue;
-          if(a[i]>t) break;
+          
+          else if(a[i]>t) break;
+          
+          else{
             l.add(a[i]);
             combination(i+1,a,t-a[i],res,l);
             l.remove(l.size()-1);
-           
+          } 
         }
      
     }
