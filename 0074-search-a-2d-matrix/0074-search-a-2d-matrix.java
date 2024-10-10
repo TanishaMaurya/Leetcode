@@ -2,18 +2,35 @@ class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
      int r=matrix.length;
     int c=matrix[0].length;
-        int l=0,h=((r*c)-1);
-        while(l<=h){
-            int mid=l+(h-l)/2;
-            int row=mid/c,col=mid%c;
-            if(matrix[row][col]==target){
-                return true;
-            }else if(matrix[row][col]>target){
-                h=mid-1;
-            }else{
-                l=mid+1;
-            }
+        int p=-1;
+      for(int i=0;i<r;i++){
+          if(matrix[i][0] <= target && matrix[i][c - 1] >= target){
+              p=i;
+              break;
+          }
+      }
+        if (p == -1) {
+            return false;
         }
-        return false;
+        int a[]=new int[c];
+        for(int i=0;i<c;i++){
+            a[i]=matrix[p][i];
+        }
+        return binarysearch(a,0,a.length-1,target);
+    }
+    public boolean binarysearch(int a[],int l,int h,int target){
+        int m=h+(l-h)/2;
+        if(l>h){
+            return false;
+        }
+        if(a[m]==target){
+            return true;
+        }
+        else if(a[m]>target){
+            return binarysearch(a,l,m-1,target);
+        }else{
+            return binarysearch(a,m+1,h,target);
+        }
+        
     }
 }
