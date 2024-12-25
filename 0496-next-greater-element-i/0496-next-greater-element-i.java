@@ -1,49 +1,26 @@
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-//       int n=nums2.length;
-//       int arr[]=new int[n];
-//       Stack<Integer> s=new Stack();
-//       for(int i=0;i<n;i++){
-//           while(!s.isEmpty() && nums2[s.peek()]<nums2[i]){
-//               arr[s.pop()]=nums2[i];
+        int n=nums1.length,m=nums2.length;
+       
+        Stack<Integer> st=new Stack();
+        Map<Integer, Integer> map = new HashMap<>();
 
-//           }
-//           s.push(i);
-//       }
-//       while(!s.isEmpty()){
-//           arr[s.pop()] = -1;
-//       }
-//       int a[]=new int[nums1.length];
-//       Map<Integer,Integer> h=new HashMap<>();
-//       for(int i=0;i<n;i++){
-//           h.put(nums2[i],arr[i]);
-//       }
-//       for(int i=0;i<nums1.length;i++){
-//           a[i]=h.get(nums1[i]);
-//       }
-//       return a;
-        
-        
-        int n=nums2.length;
-        int arr[]=new int[n];
-        Stack<Integer> s =new Stack<>();
-        for(int i=0;i<n;i++){
-            while(!s.isEmpty() && nums2[s.peek()]<nums2[i]){
-                arr[s.pop()]=nums2[i];
+        for(int i=m-1;i>=0;i--){
+           while(!st.isEmpty() && st.peek()<=nums2[i]){
+            st.pop();
+           }
+           if(st.isEmpty()){
+            map.put(nums2[i],-1);
+           }
+           else{
+                map.put(nums2[i],st.peek());
             }
-            s.push(i);
+            st.push(nums2[i]);
+           
         }
-        while(!s.isEmpty()){
-            arr[s.pop()]=-1;
-        }
-        int a[]=new int[nums1.length];
-        Map<Integer,Integer>h=new HashMap<>();
-        for(int i=0;i<n;i++){
-            h.put(nums2[i],arr[i]);
-        }
-        for(int i=0;i<nums1.length;i++){
-            a[i]=h.get(nums1[i]);
-        }
-        return a;
-          }
+       for(int i = 0; i < nums1.length; i++)
+            nums1[i] = map.get(nums1[i]);
+
+        return nums1;
+    }
 }
